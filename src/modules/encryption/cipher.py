@@ -3,12 +3,14 @@
 from abc import ABC, abstractmethod
 
 
-class Cipher(ABC):
+class SymmetricCipher(ABC):
+
     """A Cipher used for encryption and decryption."""
 
     CIPHER = None
+    KEY_TYPE = None
 
-    def __init__(self, key: bytes) -> None:
+    def __init__(self, key: KEY_TYPE) -> None:
         """
         Initializes the object with the given key.
 
@@ -18,8 +20,7 @@ class Cipher(ABC):
         Returns:
             None
         """
-        self.key = key
-        self.key_length = len(key)
+        self.key: self.KEY_TYPE = key
 
     @abstractmethod
     def encrypt(self, data: bytes) -> bytes:
@@ -54,13 +55,25 @@ class Cipher(ABC):
         pass
 
 
-class XORCipher(Cipher):
+class XORCipher(SymmetricCipher):
     """A Cipher used for encryption and decryption.
-
     This uses a simple XOR encryption for now.
     """
 
     CIPHER = 'XOR'
+
+    def __init__(self, key: bytes) -> None:
+        """
+        Initializes the object with the given key.
+
+        Args:
+            key (bytes): The key used for encryption and decryption.
+
+        Returns:
+            None
+        """
+        super().__init__(key)
+        self.key_length = len(key)
 
     def encrypt(self, data: bytes) -> bytes:
         """
@@ -79,7 +92,7 @@ class XORCipher(Cipher):
 
     def decrypt(self, data: bytes) -> bytes:
         """
-        Decrypts the given data using the same encryption algorithm as the 
+        Decrypts the given data using the same encryption algorithm as the
         encrypt method.
 
         Args:

@@ -11,6 +11,7 @@ class MainUI(App):
         super().__init__(**kwargs)
         self.root = None
         self.title = 'Fuzzy Sniffle'
+        self.icon = 'assets/images/icon.png'
 
     def build(self):
         with open('./assets/ui/ui_layout.kv') as file:

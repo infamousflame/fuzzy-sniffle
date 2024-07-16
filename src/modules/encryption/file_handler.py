@@ -14,7 +14,8 @@ def encrypt_file(
         file_path (str): The path to the file to be encrypted.
         cipher (Cipher): The cipher object used for encryption.
         out (str | None, optional): The path to store the encrypted file. If
-        None, a default path with '.enc' extension is used. Defaults to None.
+            None, a default path with '.enc' extension is used. Defaults to
+            None.
 
     Returns:
         None
@@ -39,7 +40,8 @@ def decrypt_file(
         file_path (str): The path to the file to be decrypted.
         cipher (Cipher): The cipher object used for decryption.
         out (str | None, optional): The path to store the decrypted file. If
-        None, a default path with '.dec' extension is used. Defaults to None.
+            None, a default path with '.dec' extension is used. Defaults to
+            None.
 
     Returns:
         None

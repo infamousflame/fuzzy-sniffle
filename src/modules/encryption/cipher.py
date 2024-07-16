@@ -1,26 +1,31 @@
 """Uses the cryptography library to encrypt and decrypt data."""
 
 from abc import ABC, abstractmethod
+from base64 import b64decode
 
 
-class SymmetricCipher(ABC):
+class Cipher(ABC):
+    pass
+
+
+class SymmetricCipher(Cipher):
 
     """A Cipher used for encryption and decryption."""
 
     CIPHER = None
-    KEY_TYPE = None
 
-    def __init__(self, key: KEY_TYPE) -> None:
+    @abstractmethod
+    def __init__(self, key_string: str) -> None:
         """
         Initializes the object with the given key.
 
         Args:
-            key (bytes): The key used for encryption and decryption.
+            key (str): The key used for encryption and decryption.
 
         Returns:
             None
         """
-        self.key: self.KEY_TYPE = key
+        pass
 
     @abstractmethod
     def encrypt(self, data: bytes) -> bytes:
@@ -62,7 +67,7 @@ class XORCipher(SymmetricCipher):
 
     CIPHER = 'XOR'
 
-    def __init__(self, key: bytes) -> None:
+    def __init__(self, key_string: str) -> None:
         """
         Initializes the object with the given key.
 
@@ -72,8 +77,8 @@ class XORCipher(SymmetricCipher):
         Returns:
             None
         """
-        super().__init__(key)
-        self.key_length = len(key)
+        self.key: bytes = b64decode(key_string)
+        self.key_length: int = len(self.key)
 
     def encrypt(self, data: bytes) -> bytes:
         """

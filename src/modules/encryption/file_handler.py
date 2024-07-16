@@ -6,7 +6,19 @@ from src.modules.encryption.cipher import Cipher
 def encrypt_file(
         file_path: str, cipher: Cipher, out: str | None = None
         ) -> None:
-    """Encrypts the given file using the specified cipher."""
+    """
+    Encrypts the file at the specified file path using the provided cipher and
+    writes the encrypted content to a new file.
+
+    Args:
+        file_path (str): The path to the file to be encrypted.
+        cipher (Cipher): The cipher object used for encryption.
+        out (str | None, optional): The path to store the encrypted file. If
+        None, a default path with '.enc' extension is used. Defaults to None.
+
+    Returns:
+        None
+    """
     if out is None:
         out = file_path + '.enc'
     with (
@@ -19,7 +31,19 @@ def encrypt_file(
 def decrypt_file(
         file_path: str, cipher: Cipher, out: str | None = None
         ) -> None:
-    """Decrypts the given file using the specified cipher."""
+    """
+    Decrypts the file at the specified file path using the provided cipher and
+    writes the decrypted content to a new file.
+
+    Args:
+        file_path (str): The path to the file to be decrypted.
+        cipher (Cipher): The cipher object used for decryption.
+        out (str | None, optional): The path to store the decrypted file. If
+        None, a default path with '.dec' extension is used. Defaults to None.
+
+    Returns:
+        None
+    """
     if out is None:
         if file_path.endswith('.enc'):
             out = file_path[:-4]
